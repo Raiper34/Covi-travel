@@ -1,0 +1,18 @@
+<ng-container *transloco="let t">
+    <ion-list [formGroup]="form">
+        <ion-list-header>{{ t('label.filters') }}</ion-list-header>
+        <ion-item>
+            <ion-label>{{ t('label.favourites') }}</ion-label>
+            <ion-checkbox formControlName="isFavouritesShowed" slot="start"></ion-checkbox>
+        </ion-item>
+        <ion-item>
+            <ion-label>{{ t('label.opened') }}</ion-label>
+            <ion-checkbox formControlName="isSafeShowed" slot="start"></ion-checkbox>
+        </ion-item>
+        <ion-item>
+            <ion-label>{{ t('label.closed') }}</ion-label>
+            <ion-checkbox formControlName="isUnsafeShowed" slot="start"></ion-checkbox>
+        </ion-item>
+    </ion-list>
+</ng-container>
+

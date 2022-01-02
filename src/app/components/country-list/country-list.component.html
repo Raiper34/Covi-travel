@@ -1,0 +1,19 @@
+<ng-container *transloco="let t">
+    <ion-item-group>
+        <ion-item-divider [sticky]="true">
+            <ion-label [color]="color">{{groupLabel}}</ion-label>
+            <ion-badge slot="start" [color]="color">{{countries.length}}</ion-badge>
+        </ion-item-divider>
+        <ion-item *ngFor="let item of countries" (click)="openDetailModal(item._id)" button>
+            <ng-container *ngIf="isBadgePresent">
+                <ion-badge *ngIf="item.isSafe; else elseBlock" color="success" slot="end">{{t('label.opened')}}</ion-badge>
+                <ng-template #elseBlock>
+                    <ion-badge color="danger" slot="end">{{t('label.closed')}}</ion-badge>
+                </ng-template>
+            </ng-container>
+            <ion-icon [name]="item.isFavourite ? 'star' : 'star-outline'" slot="end"
+                      (click)="toggleFavourite($event, item)"></ion-icon>
+            <ion-label>{{item.name}}</ion-label>
+        </ion-item>
+    </ion-item-group>
+</ng-container>

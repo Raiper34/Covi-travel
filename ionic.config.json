@@ -1,0 +1,7 @@
+{
+  "name": "covid-travel",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

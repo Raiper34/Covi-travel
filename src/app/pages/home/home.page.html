@@ -1,0 +1,40 @@
+<ng-container *transloco="let t">
+    <ion-header [translucent]="true">
+        <ion-toolbar color="primary">
+            <ion-title>
+                {{t('label.app_title')}}
+            </ion-title>
+            <ion-buttons slot="primary">
+                <ion-button (click)="openFilterMenu($event)">
+                    <ion-icon slot="icon-only" ios="ellipsis-horizontal" md="ellipsis-vertical"></ion-icon>
+                </ion-button>
+            </ion-buttons>
+        </ion-toolbar>
+    </ion-header>
+
+    <ion-content [fullscreen]="true">
+        <ion-refresher slot="fixed" (ionRefresh)="refresh($event)">
+            <ion-refresher-content></ion-refresher-content>
+        </ion-refresher>
+
+        {{error | json}}
+
+        <ion-list>
+            <app-country-list *ngIf="(settings$ | async).isFavouritesShowed" [countries]="favouritesCountries$ | async"
+                              [groupLabel]="t('label.favourites')" color="secondary" [isBadgePresent]="true">
+            </app-country-list>
+            <app-country-list *ngIf="(settings$ | async).isSafeShowed" [countries]="safeCountries$ | async"
+                              [groupLabel]="t('label.opened')" color="success">
+            </app-country-list>
+            <app-country-list *ngIf="(settings$ | async).isUnsafeShowed" [countries]="unsafeCountries$ | async"
+                              [groupLabel]="t('label.closed')" color="danger">
+            </app-country-list>
+        </ion-list>
+    </ion-content>
+
+    <ion-footer>
+        <ion-toolbar color="primary">
+            <ion-searchbar [formControl]="search" [placeholder]="t('label.search')"></ion-searchbar>
+        </ion-toolbar>
+    </ion-footer>
+</ng-container>

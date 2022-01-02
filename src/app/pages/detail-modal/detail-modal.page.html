@@ -1,0 +1,43 @@
+<ng-container *transloco="let t">
+    <ng-container *ngIf="item$ | async as item">
+        <ion-header [translucent]="true">
+            <ion-toolbar color="primary">
+                <ion-title>
+                    {{item.name}}
+                </ion-title>
+                <ion-buttons slot="primary">
+                    <ion-button (click)="close()">
+                        <ion-icon slot="icon-only" name="close-outline"></ion-icon>
+                    </ion-button>
+                </ion-buttons>
+            </ion-toolbar>
+        </ion-header>
+
+        <ion-content [fullscreen]="true">
+            <ion-card>
+                <ion-card-header>
+                    <ion-card-title>
+                        <ion-row>
+                            <ion-col>
+                                <ion-badge *ngIf="item.isSafe; else elseBlock"
+                                           color="success">{{t('label.opened')}}</ion-badge>
+                                <ng-template #elseBlock>
+                                    <ion-badge color="danger">{{t('label.closed')}}</ion-badge>
+                                </ng-template>
+                            </ion-col>
+                            <ion-col style="text-align: right;">
+                                <ion-icon class="item-end"
+                                          [name]="item.isFavourite ? 'star' : 'star-outline'"
+                                          (click)="toggleFavourite(item)"></ion-icon>
+                            </ion-col>
+                        </ion-row>
+                    </ion-card-title>
+                </ion-card-header>
+
+                <ion-card-content>
+                    <div [innerHTML]="getSanitizedHtml(item.description)"></div>
+                </ion-card-content>
+            </ion-card>
+        </ion-content>
+    </ng-container>
+</ng-container>

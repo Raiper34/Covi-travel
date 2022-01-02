@@ -1,0 +1,9 @@
+{
+  "/api/*": {
+    "target": "https://run.mocky.io/",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "pathRewrite": {"^/api" : ""}
+  }
+}
